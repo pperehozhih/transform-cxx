@@ -278,6 +278,7 @@ SET(UTIL_HDRS ${SWF7_HDRS}
 # Define the flags for the different editions
 
 SET(SRCS ${UTIL_SRCS})
+SET(HDRS ${UTIL_HDRS})
 
 #
 # This includes the header files in Visual Studio project files.
@@ -300,13 +301,17 @@ ENDIF(WIN32)
 
 FIND_PACKAGE(ZLIB REQUIRED)
 
-ADD_LIBRARY(${LIB} SHARED ${SRCS})
+ADD_LIBRARY(${LIB} SHARED ${SRCS} ${HDRS})
 TARGET_LINK_LIBRARIES(${LIB} ${ZLIB_LIBRARIES})
 SET_TARGET_PROPERTIES(${LIB} PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 
 # Uncomment the following lines if you want also to build a static library.
 
-#ADD_LIBRARY(${LIB}-static STATIC ${SRCS})
-#TARGET_LINK_LIBRARIES(${LIB}-static ${ZLIB_LIBRARIES})
-#SET_TARGET_PROPERTIES(${LIB}-static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
-#SET_TARGET_PROPERTIES(${LIB}-static PROPERTIES OUTPUT_NAME ${LIB})
+ADD_LIBRARY(${LIB}-static STATIC ${SRCS} ${HDRS})
+TARGET_LINK_LIBRARIES(${LIB}-static ${ZLIB_LIBRARIES})
+SET_TARGET_PROPERTIES(${LIB}-static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+
+include_directories(src)
+
+add_executable(main ${SRCS} ${HDRS} main/main.cpp)
+TARGET_LINK_LIBRARIES(main ${ZLIB_LIBRARIES})

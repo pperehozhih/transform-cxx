@@ -1057,6 +1057,8 @@ namespace transform
                     aFillStyle = new FSBitmapFill(aStream);
                     break;
                 case FSFillStyle::ClippedBitmap:
+                case FSFillStyle::NonSmoothedRepeatingBitmap:
+                case FSFillStyle::NonSmoothedClippedBitmap:
                     aFillStyle = new FSBitmapFill(aStream);
                     break;
             }

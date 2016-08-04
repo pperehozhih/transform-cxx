@@ -43,7 +43,7 @@ can be applied to shapes.
     {
 public:
         /** Definition of the types of fill styles. */
-        enum fillType { Solid = 0, LinearGradient = 16, RadialGradient = 18, TiledBitmap = 64, ClippedBitmap = 65 };
+        enum fillType { Solid = 0, LinearGradient = 16, RadialGradient = 18, TiledBitmap = 64, ClippedBitmap = 65 , NonSmoothedRepeatingBitmap = 66, NonSmoothedClippedBitmap = 67};
 
         FSFillStyle(FSInputStream* aStream);
 
