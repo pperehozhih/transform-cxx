@@ -35,7 +35,7 @@ namespace transform
 
     const char* FSAction::className() const
     {
-        static char* _name;
+        static const char* _name;
         
         switch (type)
         {

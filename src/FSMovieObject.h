@@ -111,7 +111,12 @@ public:
             LimitScript = 65,
             TabOrder = 66,
 // End Flash 7
-            QuickTime = 170, 
+// Flash 8
+            PlaceObject3 = 70,
+            DefineFont3 = 75,
+            DefineShape4 = 83,
+// End Flash 8
+            QuickTime = 170,
             Pointer = 1023
         };
 

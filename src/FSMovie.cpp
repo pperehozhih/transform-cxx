@@ -137,6 +137,10 @@
 #include "FSTabOrder.h"
 #include "FSNewFunction2.h"
 #include "FSExceptionHandler.h"
+// SWF 8
+#include "FSPlaceObject3.h"
+#include "FSDefineFont3.h"
+#include "FSDefineShape4.h"
 
 using namespace transform;
 
@@ -641,6 +645,9 @@ namespace transform
             case FSMovieObject::DefineFont2:
                 currentTag = new FSDefineFont2(aStream);
                 break;
+           case FSMovieObject::DefineFont3:
+                currentTag = new FSDefineFont3(aStream);
+                break;
 // Flash 4
             case FSMovieObject::PathsArePostscript:
                 currentTag = new FSPathsArePostscript(aStream);
@@ -688,6 +695,12 @@ namespace transform
                 break;
             case FSMovieObject::TabOrder:
                 currentTag = new FSTabOrder(aStream);
+                break;
+            case FSMovieObject::PlaceObject3:
+                currentTag = new FSPlaceObject3(aStream);
+                break;
+            case FSMovieObject::DefineShape4:
+                currentTag = new FSDefineShape4(aStream);
                 break;
             default:
                 /*

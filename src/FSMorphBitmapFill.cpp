@@ -32,7 +32,7 @@ namespace transform
 
     const char* FSMorphBitmapFill::className() const
     {
-        static char* _name = "FSMorphBitmapFill";
+        static const char* _name = "FSMorphBitmapFill";
 
         return _name;
     }

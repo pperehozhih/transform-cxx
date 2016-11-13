@@ -259,16 +259,30 @@ SET(SWF7_HDRS ${SWF6_HDRS}
     src/FSLimitScript.h
     src/FSNewFunction2.h
     src/FSRegisterVariable.h
-    src/FSTabOrder.h)
+    src/FSTabOrder.h
+    src/FSPlaceObject3.h
+    src/FSFilter.h)
 
-SET(UTIL_SRCS ${SWF7_SRCS}
+SET(SWF8_SRCS ${SWF7_SRCS}
+    src/FSPlaceObject3.cpp
+    src/FSFilter.cpp
+    src/FSDefineFont3.cpp
+    src/FSDefineShape4.cpp)
+
+SET(SWF8_HDRS ${SWF7_HDRS}
+    src/FSPlaceObject3.h
+    src/FSFilter.h
+    src/FSDefineFont3.h
+    src/FSDefineShape4.h)
+
+SET(UTIL_SRCS ${SWF8_SRCS}
     src/FSCodec.cpp
     src/FSImageConstructor.cpp
     src/FSShapeConstructor.cpp
     src/FSSoundConstructor.cpp
     src/FSTextConstructor.cpp)
 
-SET(UTIL_HDRS ${SWF7_HDRS}
+SET(UTIL_HDRS ${SWF8_HDRS}
     src/FSCodec.h
     src/FSImageConstructor.h
     src/FSShapeConstructor.h
@@ -301,17 +315,21 @@ ENDIF(WIN32)
 
 FIND_PACKAGE(ZLIB REQUIRED)
 
-ADD_LIBRARY(${LIB} SHARED ${SRCS} ${HDRS})
-TARGET_LINK_LIBRARIES(${LIB} ${ZLIB_LIBRARIES})
-SET_TARGET_PROPERTIES(${LIB} PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+IF (TRANSFORM_BUILD_SHARED)
+    ADD_LIBRARY(${LIB}-shared SHARED ${SRCS} ${HDRS})
+    TARGET_LINK_LIBRARIES(${LIB}-shared ${ZLIB_LIBRARIES})
+    SET_TARGET_PROPERTIES(${LIB}-shared PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+ENDIF()
 
 # Uncomment the following lines if you want also to build a static library.
 
-ADD_LIBRARY(${LIB}-static STATIC ${SRCS} ${HDRS})
-TARGET_LINK_LIBRARIES(${LIB}-static ${ZLIB_LIBRARIES})
-SET_TARGET_PROPERTIES(${LIB}-static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+ADD_LIBRARY(${LIB} STATIC ${SRCS} ${HDRS})
+TARGET_LINK_LIBRARIES(${LIB} ${ZLIB_LIBRARIES})
+SET_TARGET_PROPERTIES(${LIB} PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 
-include_directories(src)
+IF (TRANSFORM_BUILD_TEST)
+    include_directories(src)
 
-add_executable(main ${SRCS} ${HDRS} main/main.cpp)
-TARGET_LINK_LIBRARIES(main ${ZLIB_LIBRARIES})
+    add_executable(main ${SRCS} ${HDRS} main/main.cpp)
+    TARGET_LINK_LIBRARIES(main ${ZLIB_LIBRARIES})
+ENDIF()

@@ -47,6 +47,15 @@ DLL_TEMPLATE template class DLL_DECL transform::FSVector<transform::FSClipEvent>
 
 namespace transform
 {
+   struct FSPlaceObjectBase {
+      virtual FSCoordTransform& getTransform() = 0;
+      virtual FSColorTransform& getColorTransform() = 0;
+      virtual int getPlaceType() const = 0;
+      virtual int getClippingDepth() const = 0;
+      virtual int getLayer() const = 0;
+      virtual int getIdentifier() const = 0;
+      virtual const char* getName() = 0;
+   };
 /**
  * %FSPlaceObject2 is used to add and manipulate objects (shape, button, etc.) on the Flash 
  * Player's display list. 
@@ -260,8 +269,8 @@ movie.add(new FSPlaceObject2(movieClip.getIdentifier(), 1, events, 400, 400));
 
 <p>The FSPlaceObject2 class represents the PlaceObject2 tag from the Macromedia Flash (SWF) File Format Specification. It was introduced in Flash 3.</p>
 
- */  
-    class DLL_DECL FSPlaceObject2 : public FSMovieObject
+ */
+    class DLL_DECL FSPlaceObject2 : public FSMovieObject, public FSPlaceObjectBase
     {
 public:
         /** Definition of the different ways to place an object on the Flash Player's, display list using the FSPlaceObject2 class.
