@@ -47,7 +47,9 @@ DLL_TEMPLATE template class DLL_DECL transform::FSVector<transform::FSClipEvent>
 
 namespace transform
 {
-   struct FSPlaceObjectBase {
+   class FSPlaceObjectBase {
+   public:
+      FSPlaceObjectBase():aHaveColorTransform(false),aHaveTransform(false){}
       virtual FSCoordTransform& getTransform() = 0;
       virtual FSColorTransform& getColorTransform() = 0;
       virtual int getPlaceType() const = 0;
@@ -55,6 +57,11 @@ namespace transform
       virtual int getLayer() const = 0;
       virtual int getIdentifier() const = 0;
       virtual const char* getName() = 0;
+      bool getHaveColorTransform() const { return aHaveColorTransform; }
+      bool getHaveTransform() const { return aHaveTransform; }
+   protected:
+      bool  aHaveColorTransform;
+      bool  aHaveTransform;
    };
 /**
  * %FSPlaceObject2 is used to add and manipulate objects (shape, button, etc.) on the Flash 

@@ -265,10 +265,14 @@ namespace transform
       else
          aStream->read(FSStream::UnsignedWord, 0);
       
+      aHaveTransform = containsTransform;
+      
       if (containsColorTransform)
          colorTransform.decodeFromStream(aStream);
       else
          aStream->read(FSStream::UnsignedWord, 0);
+      
+      aHaveColorTransform = containsColorTransform;
       
       if (containsRatio)
          ratio = aStream->read(FSStream::UnsignedWord, 16) / 65535.0f;
