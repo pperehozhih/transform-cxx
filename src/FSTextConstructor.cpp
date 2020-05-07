@@ -80,7 +80,7 @@
 #define SCALE 1
 #define GLYPH_OFFSET_SIZE 2
 
-#ifndef WIN32
+#ifndef _WIN32
 size_t wcslen(const wchar_t* wstr)
 {
     size_t count = 0;
